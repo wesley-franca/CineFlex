@@ -1,11 +1,14 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-function Movie({ Id, overview, posterURL, releaseDate, title }) {
-
+function Movie({ id, posterURL }) {
+    
     return (
-        <Banner>
-            <img src={posterURL} alt="" />
-        </Banner>
+        <Link to={`/sessoes/${id}`}>
+            <Banner>
+                <img src={posterURL} alt="" />
+            </Banner>
+        </Link>
     )
 }
 

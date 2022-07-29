@@ -5,8 +5,8 @@ import axios from "axios";
 
 
 function Display() {
-    const [movies, setMovies] = useState([]);
-
+    const [movies, setMovies] = useState(null);
+    
     useEffect(() => {
         const require = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies");
 
@@ -15,18 +15,19 @@ function Display() {
         });
     }, []);
 
+    if(movies !== null){
     return (
-        movies.map((movie)=> {
-        return <Movie
-            Id={movie.id}
-            overview={movie.overview}
-            posterURL={movie.posterURL}
-            releaseDate={movie.releaseDate}
-            title={movie.title}
-            key={movie.id}
-        />
-    })     
-    )
+        movies.map((movie) => {
+            return <Movie
+                id={movie.id}
+                posterURL={movie.posterURL}
+                key={movie.id}
+            />
+        })
+    )}else{
+        return <div>carregando lista de filmes</div>
+    }
+
 }
 
 
