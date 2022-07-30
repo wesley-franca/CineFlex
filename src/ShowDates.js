@@ -1,7 +1,7 @@
 import Sections from "./Sections.js";
+import Footer from "./Footer.js";
 
-
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -9,6 +9,8 @@ import styled from 'styled-components';
 function ShowDates() {
     const { idFilme } = useParams();
     const [dates, setDates] = useState(null);
+    let location = useLocation();
+    location = (location.pathname).slice(1, 8)
 
     useEffect(() => {
         const require = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${idFilme}/showtimes`);
@@ -19,7 +21,7 @@ function ShowDates() {
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
+    
     if (dates !== null) {
         return (
             <Wrapper>
@@ -27,7 +29,7 @@ function ShowDates() {
                     <p>Selecione o horário</p>
                 </Title>
                 <Sections dates={dates} />
-                {/* <Footer /> */}
+                <Footer dates={dates} location={location}/> 
             </Wrapper>
         )
     }
@@ -39,13 +41,14 @@ function ShowDates() {
             <Load>
                 "carregando"
             </Load>
-            {/* <Footer /> */}
+            <Footer dates={dates} location={location}/> 
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
 padding-bottom: 130px;
+padding-top: 67px
 `
 
 const Load = styled.div`

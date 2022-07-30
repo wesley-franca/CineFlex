@@ -1,24 +1,35 @@
 import styled from "styled-components"
 
-function Footer({ tape }) {
+function Footer(props) {
+    const { dates, location } = props;
+    
 
-
-
-    if (tape !== null) {
-        console.log(tape)
-        const title = tape.title;
-        const posterURL = tape.URL;
+    if(dates !== null && location === "sessoes") {
         return (
             <Wrapper>
                 <Banner>
-                    <img src={posterURL} alt="" />
+                    <img src={dates.posterURL} alt="" />
                 </Banner>
-                <p>{title}</p>
+                <div>
+                    <p>{dates.title}</p>
+                    <p></p>
+                </div>
             </Wrapper>
         )
-    } else {
-        return "";
+    }else if (dates !== null && location === "assentos"){
+        return(
+            <Wrapper>
+                <Banner>
+                    <img src={dates.movie.posterURL} alt="" />
+                </Banner>
+                <div>
+                    <p>{dates.movie.title}</p>
+                    <p>{dates.day.weekday} - {dates.name}</p>
+                </div>
+            </Wrapper>
+        )
     }
+    return "Carregando"
 }
 
 const Wrapper = styled.div`
@@ -37,6 +48,7 @@ const Wrapper = styled.div`
         font-size: 26px;
         font-weight: 400;
         font-family: 'Roboto',sans-serif;
+        word-wrap: wrap;
     }
 
 `

@@ -5,7 +5,7 @@ import axios from "axios";
 import styled from "styled-components"
 
 
-function Display({ setTape }) {
+function Display() {
     const [movies, setMovies] = useState(null);
     
     useEffect(() => {
@@ -20,10 +20,8 @@ function Display({ setTape }) {
     return (
         movies.map((movie) => {
             return <Movie
-                setTape={setTape}
                 id={movie.id}
                 posterURL={movie.posterURL}
-                title={movie.title}
                 key={movie.id}
             />
         })

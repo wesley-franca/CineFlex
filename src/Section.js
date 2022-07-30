@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 function Section({ days }) {
     const weekday = days.weekday
@@ -12,7 +13,7 @@ function Section({ days }) {
                 {weekday} - {date}
             </Title>
             <Hours>
-                {days.showtimes.map((room) => <div key={room.id}>{room.name}</div>)}
+                {days.showtimes.map((room, index) => <Link to={`/assentos/${room.id}`} key={index}><div key={room.id}>{room.name}</div></Link>)}
             </Hours>
         </Wrapper>
     )
@@ -21,6 +22,9 @@ function Section({ days }) {
 
 const Wrapper = styled.div`
     margin-left: 24px;
+    a{
+        text-decoration: none;
+    }
 `
 
 const Title = styled.div`

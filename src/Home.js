@@ -2,14 +2,14 @@ import Display from "./Display.js";
 
 import styled from "styled-components";
 
-function Home({ setTape }) {
+function Home() {
     return (
         <Wrapper>
             <Title>
                 <p>Selecione o filme</p>
             </Title>
             <MovieContainer>
-                <Display setTape={setTape} />
+                <Display />
             </MovieContainer>
         </Wrapper>
     )
@@ -17,6 +17,7 @@ function Home({ setTape }) {
 
 
 const Wrapper = styled.div`
+padding-top: 67px;
     background-color: #ffffff;
     height: 100vh;
 `
