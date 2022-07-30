@@ -1,4 +1,6 @@
 import Footer from "./Footer";
+import Site from "./Site.js";
+
 
 import { useParams } from 'react-router-dom';
 import styled from "styled-components";
@@ -9,9 +11,11 @@ import { useLocation } from 'react-router-dom';
 function Seats() {
     const { idSessao } = useParams();
     const [seats, setSeats] = useState(null)
+    const [choosenSeats, setChoosenSeats] = useState([])
     let location = useLocation();
     location = (location.pathname).slice(1, 9)
-
+    
+    console.log(choosenSeats)
 
     useEffect(() => {
         const require = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`);
@@ -22,12 +26,6 @@ function Seats() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
-    if (seats !== null) {
-        console.log(seats.seats)
-    }
-
-
     if (seats !== null) {
         return (
             <Wrapper>
@@ -35,22 +33,11 @@ function Seats() {
                     <p>Selecione o(s) assento(s)</p>
                 </Title>
                 <SeatBox>
+
                 {seats.seats.map((local, index)=> {
-                    if (local.isAvailable) {
-                        return (
-                            <Box onClick={() => {console.log("cliquei")}} key={index}>
-                                <Disponivel>
-                                    {local.name}
-                                </Disponivel>
-                            </Box>)
-                    }
-                    return (
-                        <Box onClick={() => {console.log("cliquei")}} key={index}>
-                            <Indisponivel>
-                                {local.name}
-                            </Indisponivel>
-                        </Box>)    
+                    return <Site local={local} choosenSeats={choosenSeats} setChoosenSeats={setChoosenSeats} key={index} />
                 })}
+                
                 </SeatBox>
 
                 <Subtitle>
@@ -163,6 +150,7 @@ const Indisponivel = styled.div`
     align-items: center;
     border: solid #F7C52B 1px;
     border-radius: 50%;
+   
     background-color: #FBE192;
     margin: 9px 4px;
 `
