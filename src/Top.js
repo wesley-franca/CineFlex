@@ -1,24 +1,32 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 
 function Top() {
     return (
-        <Content>
-            <Title>
-                CINEFLEX
-            </Title>
-        </Content>
+        <Wrapper>
+            <Link to="/" >
+                <Title>
+                    CINEFLEX
+                </Title>
+            </Link>
+        </Wrapper>
     )
 
 }
 
-const Content = styled.div`
+const Wrapper = styled.div`
     height: 67px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #C3CFD9;
-`
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    a {
+        text-decoration: none;
+    }
+    `
 const Title = styled.p`
     color: #E8833A;
     font-size: 34px;

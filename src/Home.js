@@ -2,21 +2,21 @@ import Display from "./Display.js";
 
 import styled from "styled-components";
 
-function Home() {
+function Home({ setTape }) {
     return (
-        <Container>
+        <Wrapper>
             <Title>
                 <p>Selecione o filme</p>
             </Title>
             <MovieContainer>
-                <Display />
+                <Display setTape={setTape} />
             </MovieContainer>
-        </Container>
+        </Wrapper>
     )
 }
 
 
-const Container = styled.div`
+const Wrapper = styled.div`
     background-color: #ffffff;
     height: 100vh;
 `

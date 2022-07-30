@@ -1,5 +1,5 @@
-import Sections from "./Sections.js"
-import Footer from "./Footer.js"
+import Sections from "./Sections.js";
+
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -15,40 +15,55 @@ function ShowDates() {
 
         require.then(res => {
             setDates(res.data);
-            
+
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if(dates !== null){
+    if (dates !== null) {
+        return (
+            <Wrapper>
+                <Title>
+                    <p>Selecione o horário</p>
+                </Title>
+                <Sections dates={dates} />
+                {/* <Footer /> */}
+            </Wrapper>
+        )
+    }
     return (
-        <div>
+        <Wrapper>
             <Title>
                 <p>Selecione o horário</p>
             </Title>
-            <Sections dates={dates}/>
-        <Footer/>
-        </div>
+            <Load>
+                "carregando"
+            </Load>
+            {/* <Footer /> */}
+        </Wrapper>
     )
 }
-return (
-    <div>
-        <Title>
-            <p>Selecione o horário</p>
-        </Title>
-        "carregando"
-    </div>
-)
-}
+
+const Wrapper = styled.div`
+padding-bottom: 130px;
+`
+
+const Load = styled.div`
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 
 const Title = styled.div`
     height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #293845;
+    font-family: 'Roboto',sans-serif;
     font-size: 24px;
     font-weight: 400;
-    font-family:  'Roboto', sans-serif;
 `
 
 export default ShowDates;

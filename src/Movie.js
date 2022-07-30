@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-function Movie({ id, posterURL }) {
-    
+function Movie({ id, posterURL, title, setTape }) {
+
     return (
-        <Link to={`/sessoes/${id}`}>
+        <Link to={`/sessoes/${id}`} onClick={() => {setTape({"title": title, "URL": posterURL})}}>
             <Banner>
                 <img src={posterURL} alt="" />
             </Banner>

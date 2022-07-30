@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 function Section({ days }) {
-    console.log(days)
     const weekday = days.weekday
     const date = days.date
    
@@ -47,6 +46,7 @@ div{
     font-size: 18px;
     font-weight: 400;
     color: #ffffff;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
 }
 `
 

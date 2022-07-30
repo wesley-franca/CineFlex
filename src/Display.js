@@ -2,9 +2,10 @@ import Movie from "./Movie.js"
 
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import styled from "styled-components"
 
 
-function Display() {
+function Display({ setTape }) {
     const [movies, setMovies] = useState(null);
     
     useEffect(() => {
@@ -14,22 +15,30 @@ function Display() {
             setMovies(res.data);
         });
     }, []);
-
+    
     if(movies !== null){
     return (
         movies.map((movie) => {
             return <Movie
+                setTape={setTape}
                 id={movie.id}
                 posterURL={movie.posterURL}
+                title={movie.title}
                 key={movie.id}
             />
         })
     )}else{
-        return <div>carregando lista de filmes</div>
+        return <Load>carregando lista de filmes</Load>
     }
 
 }
 
+const Load = styled.div`
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 
 
 export default Display;
