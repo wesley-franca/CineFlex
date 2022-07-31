@@ -6,16 +6,32 @@ import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Seats() {
     const { idSessao } = useParams();
     const [seats, setSeats] = useState(null)
     const [choosenSeats, setChoosenSeats] = useState([])
+    const [name, setName] = useState("")
+    const [cpf, setCpf] = useState("")
+
+    const navigate = useNavigate();
     let location = useLocation();
     location = (location.pathname).slice(1, 9)
+
+    const body = {
+        name: name,
+        cpf: cpf,
+        choosenSeats: choosenSeats,
+        id: idSessao,
+    }
+    const Data = {
+        ids: choosenSeats,
+        name: name,
+        cpf: cpf,
+    }
     
-    console.log(choosenSeats)
+
 
     useEffect(() => {
         const require = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`);
@@ -26,6 +42,21 @@ function Seats() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    function SendSuccess() {
+        if (choosenSeats.length !== 0) {
+            console.log(Data)
+
+            const require = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", Data);
+
+            return (navigate("/sucesso", { state: body }))
+        }
+        alert("Por favor, selecione ao menos um assento.")
+    }
+
+    function handleForm(e){
+        e.preventDefault();
+        SendSuccess()
+    }
     if (seats !== null) {
         return (
             <Wrapper>
@@ -58,6 +89,29 @@ function Seats() {
                     </Box>
                 </Subtitle>
 
+                <FormBlock onSubmit={handleForm}>
+                    <InputLabel>Nome do comprador:</InputLabel>
+                    <InputForm 
+                        type="text" 
+                        name="formName"
+                        placeholder="Digite seu nome..." 
+                        onChange={(e)=> setName(e.target.value)}
+                        value= { name }
+                        required
+                    />
+
+                    <InputLabel>CPF do comprador:</InputLabel>
+                    <InputForm 
+                        type="text" 
+                        name="formCPF" 
+                        placeholder="Digite seu CPF..."
+                        onChange={(e)=> setCpf(e.target.value)}
+                        value= { cpf }
+                        required
+                    />
+
+                    <Send>Reservar assento(s)</Send>
+                </FormBlock>
                 
 
                 <Footer dates={seats} location={location} />
@@ -154,6 +208,45 @@ const Indisponivel = styled.div`
     background-color: #FBE192;
     margin: 9px 4px;
 `
+const InputLabel = styled.label`
+    width: 80%;
+    margin: 5px auto;
+    font-family:  'Roboto',sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #293845;
+`
 
+const InputForm = styled.input`
+    height: 50px;
+    width: 80%;
+    margin: auto;
+    border: 1px solid #D5D5D5;
+    border-radius: 3px;
+    font-family: 'Roboto',sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 20px;
+`
+
+const Send = styled.button`
+    width: 225px;
+    height: 42px;
+    background-color: #E8833A;
+    color: #FFFFFF;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    border-radius: 3px;
+    margin: 50px auto 0 auto;
+    border: none;
+`
+const FormBlock = styled.form`
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    
+`
 
 export default Seats;

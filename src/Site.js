@@ -4,23 +4,24 @@ import { useState } from "react";
 function Site({ local, choosenSeats, setChoosenSeats }) {
     const [clicked, setClicked] = useState(false)
 
+    function DifferentId(value){
+        return value !== local.id
+    }
+
     if (clicked) {
         return(
             <Box onClick = {() => {
-                console.log("cliquei")
                 setClicked(!clicked)
-                console.log(choosenSeats)
-                setChoosenSeats.remove(local.id)
-                console.log(choosenSeats)
+                setChoosenSeats(choosenSeats.filter(DifferentId))
         }}>
         <Selecionado>
             {local.name}
         </Selecionado>
             </Box >)
+
     } else if(local.isAvailable){
         return(
             <Box onClick = {() => {
-                console.log("cliquei")
                 setClicked(!clicked)
                 setChoosenSeats([...choosenSeats, local.id])
         }}>
@@ -30,8 +31,10 @@ function Site({ local, choosenSeats, setChoosenSeats }) {
             </Box >)
     }
 return (
-    <Box>
-        <Indisponivel>
+    <Box onClick = {() => {
+        alert("Esse assento não está disponível")
+    }}> 
+        <Indisponivel On>
             {local.name}
         </Indisponivel>
     </Box>)    

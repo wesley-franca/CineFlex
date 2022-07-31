@@ -2,7 +2,7 @@ import Top from "./Top.js";
 import Home from "./Home.js";
 import ShowDates from "./ShowDates.js";
 import Seats from "./Seats.js";
-
+import Success from "./Success.js";
 
 import "./assets/reset.css";
 
@@ -17,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sessoes/:idFilme" element={<ShowDates />} />
         <Route path="/assentos/:idSessao" element={<Seats />} />
+        <Route path="/sucesso" element={<Success />} />
       </Routes>
     </BrowserRouter>
   )
