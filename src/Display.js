@@ -1,5 +1,7 @@
 import Movie from "./Movie.js"
 
+import Spinner from "./assets/images/Spinner.gif";
+
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import styled from "styled-components"
@@ -26,7 +28,9 @@ function Display() {
             />
         })
     )}else{
-        return <Load>carregando lista de filmes</Load>
+        return <Load>
+            <img src={Spinner} alt="" />
+        </Load>
     }
 
 }

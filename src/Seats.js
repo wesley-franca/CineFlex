@@ -1,6 +1,7 @@
 import Footer from "./Footer";
 import Place from "./Place.js";
 
+import Spinner from "./assets/images/Spinner.gif";
 
 import { useParams } from 'react-router-dom';
 import styled from "styled-components";
@@ -124,7 +125,7 @@ function Seats() {
                 <p>Selecione o(s) assento(s)</p>
             </Title>
             <Load>
-                "carregando"
+                <img src={Spinner} alt="" />
             </Load>
         </Wrapper>
     )

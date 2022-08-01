@@ -1,3 +1,5 @@
+import Spinner from "./assets/images/Spinner.gif";
+
 import styled from "styled-components"
 
 function Footer(props) {
@@ -29,7 +31,11 @@ function Footer(props) {
             </Wrapper>
         )
     }
-    return "Carregando"
+    return (
+        <Banner>
+            <img src={Spinner} alt="" />
+        </Banner>
+    )
 }
 
 const Wrapper = styled.div`

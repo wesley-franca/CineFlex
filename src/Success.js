@@ -1,3 +1,5 @@
+import Spinner from "./assets/images/Spinner.gif";
+
 import styled from 'styled-components';
 import { useLocation, Link } from "react-router-dom";
 import axios from 'axios';
@@ -71,11 +73,13 @@ function Success() {
                 </p>
                 <p>com sucesso!</p>
             </Title>
-            <div>
-                "carregando"
-            </div>
+            <Load>
+                <img src={Spinner} alt="" />
+            </Load>
         </Wrapper>
+        
     )
+    
 }
 
 const Wrapper = styled.div`
@@ -123,5 +127,11 @@ const Home = styled.p`
     font-size: 18px;
     font-family: 'Roboto';
     margin: 70px auto;
+`
+const Load = styled.div`
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 export default Success;

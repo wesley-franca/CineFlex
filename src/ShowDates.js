@@ -1,6 +1,8 @@
 import Sections from "./Sections.js";
 import Footer from "./Footer.js";
 
+import Spinner from "./assets/images/Spinner.gif";
+
 import { useParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -39,7 +41,7 @@ function ShowDates() {
                 <p>Selecione o horário</p>
             </Title>
             <Load>
-                "carregando"
+                <img src={Spinner} alt="" />
             </Load>
             <Footer dates={dates} location={location}/> 
         </Wrapper>
