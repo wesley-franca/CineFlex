@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import Site from "./Site.js";
+import Place from "./Place.js";
 
 
 import { useParams } from 'react-router-dom';
@@ -8,21 +8,24 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 
+
+
 function Seats() {
     const { idSessao } = useParams();
-    const [seats, setSeats] = useState(null)
-    const [choosenSeats, setChoosenSeats] = useState([])
-    const [name, setName] = useState("")
-    const [cpf, setCpf] = useState("")
+    const [seats, setSeats] = useState(null);
+    const [choosenSeats, setChoosenSeats] = useState([]);
+    const [numberSeat, setNumberSeat] = useState([]);
+    const [name, setName] = useState("");
+    const [cpf, setCpf] = useState("");
 
     const navigate = useNavigate();
     let location = useLocation();
-    location = (location.pathname).slice(1, 9)
+    location = (location.pathname).slice(1, 9);
 
     const body = {
         name: name,
         cpf: cpf,
-        choosenSeats: choosenSeats,
+        numberSeat: numberSeat,
         id: idSessao,
     }
     const Data = {
@@ -30,8 +33,6 @@ function Seats() {
         name: name,
         cpf: cpf,
     }
-    
-
 
     useEffect(() => {
         const require = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`);
@@ -44,9 +45,8 @@ function Seats() {
 
     function SendSuccess() {
         if (choosenSeats.length !== 0) {
-            console.log(Data)
-
-            const require = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", Data);
+              
+            axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", Data);
 
             return (navigate("/sucesso", { state: body }))
         }
@@ -66,7 +66,7 @@ function Seats() {
                 <SeatBox>
 
                 {seats.seats.map((local, index)=> {
-                    return <Site local={local} choosenSeats={choosenSeats} setChoosenSeats={setChoosenSeats} key={index} />
+                    return <Place local={local} choosenSeats={choosenSeats} setChoosenSeats={setChoosenSeats} numberSeat={numberSeat} setNumberSeat={setNumberSeat} key={index} />
                 })}
                 
                 </SeatBox>

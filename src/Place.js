@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-function Site({ local, choosenSeats, setChoosenSeats }) {
+function Place({ local, choosenSeats, setChoosenSeats, numberSeat, setNumberSeat }) {
     const [clicked, setClicked] = useState(false)
 
     function DifferentId(value){
         return value !== local.id
+    }
+    function DiferentSeat(value){
+        return value !== local.name
     }
 
     if (clicked) {
@@ -13,6 +16,7 @@ function Site({ local, choosenSeats, setChoosenSeats }) {
             <Box onClick = {() => {
                 setClicked(!clicked)
                 setChoosenSeats(choosenSeats.filter(DifferentId))
+                setNumberSeat(numberSeat.filter(DiferentSeat))
         }}>
         <Selecionado>
             {local.name}
@@ -24,6 +28,7 @@ function Site({ local, choosenSeats, setChoosenSeats }) {
             <Box onClick = {() => {
                 setClicked(!clicked)
                 setChoosenSeats([...choosenSeats, local.id])
+                setNumberSeat([...numberSeat, local.name])
         }}>
         <Disponivel>
             {local.name}
@@ -81,5 +86,5 @@ const Indisponivel = styled.div`
     margin: 9px 4px;
 `
 
-export default Site;
+export default Place;
 

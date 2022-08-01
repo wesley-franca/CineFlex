@@ -17,7 +17,7 @@ function Home() {
 
 
 const Wrapper = styled.div`
-padding-top: 67px;
+    padding-top: 67px;
     background-color: #ffffff;
     height: 100vh;
 `
